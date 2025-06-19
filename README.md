@@ -1,46 +1,65 @@
-# Selenium WebDriver Automation: Formy Form Submission
+# PasteCode.io Automation Test
 
-This project demonstrates automated form submission using **Selenium WebDriver**, **JUnit 5**, and the **Page Object Model**.  
-The test scenario replicates the process of creating a "paste" by filling out a form on the website [formy-project.herokuapp.com/form](https://formy-project.herokuapp.com/form).
+This project automates the creation of a new code snippet on [PasteCode.io](https://pastecode.io) using Selenium WebDriver and JUnit5. It follows the Page Object Model pattern.
 
----
+## Tools & Technologies
 
-## Scenario Description
+- Java 11+
+- Selenium WebDriver 4.21.0
+- JUnit 5
+- WebDriverManager
+- Maven
+- ChromeDriver
 
-Automated actions include:
+## Test Scenario
 
-1. Open the Formy form page.
-2. Fill in the following fields:
-    - **First Name**: `Hello from WebDriver`
-    - **Last Name**: `helloweb`
-    - **Job Title**: `10 Minutes`
-3. Click the Submit button.
-4. Verify the form submission leads to a "Thank You" confirmation page.
+The automated test performs the following steps:
 
----
+1. Opens `https://pastecode.io`
+2. Fills the **code field** with:
+   ```sh
+   git config --global user.name  "New Sheriff in Town"
+   git reset $(git commit-tree HEAD^{tree} -m "Legacy code")
+   git push origin master --force
+   ```
+3. Sets syntax highlighting to `sh`
+4. Sets paste expiration to **15 Minutes**
+5. Sets the paste title to: `how to gain dominance among developers`
+6. Scrolls to the top and waits 3 seconds before clicking **"Save Snippet"**
+7. Waits until the snippet creation confirmation link appears
+8. Closes the browser
+
+> The test repeats this scenario 5 times by clicking the **"Create Another Snippet"** button.
+
+If a pop-up appears, it is detected and closed automatically.
 
 ## Project Structure
 
-- `pages/FormyPage.java` — Page Object class encapsulating form interactions.
-- `tests/FormSubmissionTest.java` — JUnit test class executing the scenario.
-- `pom.xml` — Maven build configuration and dependencies.
-
----
-
-## Technologies Used
-
-- Java 17+ (or Java 11+)
-- Selenium WebDriver 4.21.0
-- JUnit 5.10.2
-- Maven
-
----
+```
+src/
+├── main/
+│   └── java/
+│       └── com.epam.training.student_anastasiia_tsyvina/
+│           └── PasteCodePage.java
+├── test/
+│   └── java/
+│       └── com.epam.training.student_anastasiia_tsyvina/
+│           └── PasteCodeTest.java
+```
 
 ## How to Run
 
-1. Clone the repository.
-2. Ensure ChromeDriver is in your system path.
-3. Run tests using Maven:
-
 ```bash
-mvn clean test
+mvn test
+```
+
+Make sure:
+- You have [Maven](https://maven.apache.org/) installed
+- Chrome is up-to-date on your system
+
+## Notes
+
+- WebDriverManager handles ChromeDriver automatically
+- All ads are ignored or removed where possible
+- The test checks that the snippet was successfully created based on element visibility
+- The test exits cleanly after each run
