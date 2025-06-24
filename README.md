@@ -1,87 +1,53 @@
-# String Pattern Analyzer Automation
+# SauceDemo Login Test Automation
 
-## 📘 Project Description
+This project automates login form validation for [SauceDemo](https://www.saucedemo.com/) using Selenium WebDriver, TestNG, and Maven.
 
-This project is a part of an automation assignment using **Selenium WebDriver**, **JUnit**, and **Page Object** pattern. It includes:
+## Launch URL
+https://www.saucedemo.com/
 
-1. Java logic for string pattern analysis  
-2. Unit tests with FIRST and AAA principles  
-3. End-to-end UI automation using Selenium (optional extension)
+## Use Cases Covered
 
----
+### UC-1: Login with empty credentials
+- Type any credentials in the "Username" and "Password" fields.
+- Clear both inputs.
+- Click the "Login" button.
+- Expected: "Username is required" error message is displayed.
 
-## Functional Goals
+### UC-2: Login with Username only
+- Type any credentials in the "Username" field.
+- Enter any password.
+- Clear the "Password" input.
+- Click the "Login" button.
+- Expected: "Password is required" error message is displayed.
 
-### Implement 3 analysis methods:
-- **Max number of unequal consecutive characters**  
-- **Max number of consecutive identical Latin letters**  
-- **Max number of consecutive identical digits**
+### UC-3: Login with valid credentials
+- Use a valid username (e.g., `standard_user`).
+- Use the password `secret_sauce`.
+- Click the "Login" button.
+- Expected: The page title contains "Swag Labs".
 
-### Provide full JUnit test coverage:
-- Each method must be tested with multiple edge cases  
-- Use **AAA** and **FIRST** testing principles
+## Technologies Used
 
----
+| Component        | Value                          |
+|------------------|--------------------------------|
+| Programming Language | Java 17                    |
+| Build Tool       | Maven                          |
+| Test Framework   | TestNG                          |
+| Automation Tool  | Selenium WebDriver              |
+| Browsers         | Chrome, Firefox                 |
+| Element Locators | CSS                             |
+| Assertions       | AssertJ                         |
+| Logging          | SLF4J                           |
+| Test Parameterization | TestNG DataProvider         |
+| Parallel Execution | Enabled via DataProvider     |
 
-## Project Structure
+## Optional Design Patterns and Practices
 
-```
-src/
-├── main/
-│   └── java/
-│       └── com/epam/training/student_anastasiia_tsyvina/
-│           └── StringAnalyzer.java
-└── test/
-    └── java/
-        └── com/epam/training/student_anastasiia_tsyvina/
-            └── StringAnalyzerTest.java
-```
+- Singleton pattern
+- Adapter pattern
+- Strategy pattern
+- BDD-style test structure (optionally with Cucumber)
+## Run:   
+-mvn clean test -DsuiteXmlFile=testng.xml
 
----
 
-## Key Classes and Methods
-
-### `StringAnalyzer.java`
-
-```java
-int maxUnequalConsecutiveChars(String input);
-int maxConsecutiveIdenticalLetters(String input);
-int maxConsecutiveIdenticalDigits(String input);
-```
-
-- Uses simple iteration to analyze input.  
-- Null-safe and handles empty input.
-
-### `StringAnalyzerTest.java`
-
-- Uses **JUnit 5**  
-- Tests follow **AAA** (Arrange-Act-Assert) format  
-- Example:
-
-```java
-@Test
-void maxConsecutiveIdenticalLetters_whenNoLetters_thenZero() {
-    String input = "11223344";
-    int result = analyzer.maxConsecutiveIdenticalLetters(input);
-    assertEquals(0, result);
-}
-```
-
----
-
-## Test Execution
-
-```bash
-mvn clean test
-```
-
-- Output includes test results for all 3 logic units.  
-- Designed to run quickly and independently.
-
----
-
-## Author
-
-**Anastasiia Tsyvina**  
-Automation Trainee @ EPAM  
-Technologies: Java, JUnit, Selenium  
