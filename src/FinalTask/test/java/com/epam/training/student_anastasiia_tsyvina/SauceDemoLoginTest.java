@@ -1,10 +1,8 @@
 package com.epam.training.student_anastasiia_tsyvina;
 
-import org.openqa.selenium.By;
+import com.epam.training.student_anastasiia_tsyvina.DriverManager;
+import com.epam.training.student_anastasiia_tsyvina.steps.SauceDemoSteps;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SauceDemoLoginTest {
     private WebDriver driver;
+    private SauceDemoSteps steps;
 
     private static final Logger logger = LoggerFactory.getLogger(SauceDemoLoginTest.class);
 
@@ -20,58 +19,35 @@ public class SauceDemoLoginTest {
     @BeforeMethod
     public void setUp(@Optional("chrome") String browser) {
         logger.info("Launching browser: {}", browser);
-        if (browser.equalsIgnoreCase("firefox")) {
-            driver = new FirefoxDriver();
-        } else {
-            driver = new ChromeDriver();
-        }
+        driver = DriverManager.getDriver(browser);
         driver.get("https://www.saucedemo.com/");
+        steps = new SauceDemoSteps(driver);
     }
 
     @AfterMethod
     public void tearDown() {
         logger.info("Closing browser");
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
-    private void login(String username, String password) {
-        WebElement usernameField = driver.findElement(By.cssSelector("#user-name"));
-        WebElement passwordField = driver.findElement(By.cssSelector("#password"));
-        WebElement loginButton = driver.findElement(By.cssSelector("#login-button"));
-
-        usernameField.clear();
-        passwordField.clear();
-
-        if (username != null) usernameField.sendKeys(username);
-        if (password != null) passwordField.sendKeys(password);
-
-        loginButton.click();
-    }
-
-    private String getErrorMessage() {
-        return driver.findElement(By.cssSelector("h3[data-test='error']")).getText();
+        DriverManager.quitDriver();
     }
 
     @Test
     public void testEmptyCredentials() {
-        logger.info("UC-1 Test Login form with empty credentials: ");
-        login("", "");
-        assertThat(getErrorMessage()).contains("Username is required");
+        logger.info("UC-1: Test login with empty credentials");
+        steps.loginWithCredentials("", "");
+        assertThat(steps.getErrorMessage()).contains("Username is required");
     }
 
     @Test
     public void testOnlyUsernameProvided() {
-        logger.info("UC-2 Test Login form with credentials by passing Username: ");
-        login("standard_user", "");
-        assertThat(getErrorMessage()).contains("Password is required");
+        logger.info("UC-2: Test login with username only");
+        steps.loginWithCredentials("standard_user", "");
+        assertThat(steps.getErrorMessage()).contains("Password is required");
     }
 
     @Test(dataProvider = "validCredentials")
     public void testValidLogin(String username, String password) {
-        logger.info("UC-3 Test Login form with credentials by passing Username & Password: {}", username);
-        login(username, password);
+        logger.info("UC-3: Test valid login with {}", username);
+        steps.loginWithCredentials(username, password);
         assertThat(driver.getTitle()).contains("Swag Labs");
     }
 
