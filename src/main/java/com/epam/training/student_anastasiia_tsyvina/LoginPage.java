@@ -1,4 +1,4 @@
-package com.epam.training.student_anastasiia_tsyvina.pages;
+package com.epam.training.student_anastasiia_tsyvina;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

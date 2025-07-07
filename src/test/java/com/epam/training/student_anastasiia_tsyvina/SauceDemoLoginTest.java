@@ -1,7 +1,7 @@
 package com.epam.training.student_anastasiia_tsyvina;
 
 import com.epam.training.student_anastasiia_tsyvina.DriverManager;
-import com.epam.training.student_anastasiia_tsyvina.steps.SauceDemoSteps;
+import com.epam.training.student_anastasiia_tsyvina.SauceDemoSteps;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import org.slf4j.Logger;

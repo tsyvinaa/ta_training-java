@@ -1,6 +1,6 @@
-package com.epam.training.student_anastasiia_tsyvina.steps;
+package com.epam.training.student_anastasiia_tsyvina;
 
-import com.epam.training.student_anastasiia_tsyvina.pages.LoginPage;
+import com.epam.training.student_anastasiia_tsyvina.LoginPage;
 import org.openqa.selenium.WebDriver;
 
 public class SauceDemoSteps {
