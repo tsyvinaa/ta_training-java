@@ -1,0 +1,5 @@
+com/epam/training/student_anastasiia_tsyvina/steps/LoginSteps.class
+com/epam/training/student_anastasiia_tsyvina/driver/DriverSingleton.class
+com/epam/training/student_anastasiia_tsyvina/pages/LoginPage.class
+com/epam/training/student_anastasiia_tsyvina/strategy/BrowserStrategy.class
+com/epam/training/student_anastasiia_tsyvina/adapter/LoginAssertions.class

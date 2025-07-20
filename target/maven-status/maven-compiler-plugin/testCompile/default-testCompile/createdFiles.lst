@@ -1,0 +1,4 @@
+com/epam/training/student_anastasiia_tsyvina/tests/SauceDemoLoginTest.class
+com/epam/training/student_anastasiia_tsyvina/stepdefs/LoginStepDefs.class
+com/epam/training/student_anastasiia_tsyvina/dataprovider/LoginDataProvider.class
+com/epam/training/student_anastasiia_tsyvina/runner/CucumberTestRunner.class
